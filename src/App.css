@@ -1,38 +1,351 @@
-.App {
-  text-align: center;
+/* Reset */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html{
+    font-size: 62.5%; /* 1rem = 10px */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body{
+    background: rgb(3, 0, 31);
+    color: white;
+    font-family: 'Open Sans', sans-serif;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Divider */
+.divider{
+    width: 100%;
+    height: 1px;
+    background-color: rgb(100, 100, 100);
+    margin: 1.5rem 0;
 }
 
-.App-link {
-  color: #61dafb;
+/* App Layout */
+.App{
+    min-height: 100vh;
+    display: flex;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Sidebar */
+.sidebar {
+    width: 25rem;
+    display: flex;
+    flex-direction: column;
+    border-right: 2px solid white;
+    background-color: rgb(4, 2, 41);
+}
+
+/* Main content area */
+.main{
+    min-height: calc(100vh - 14rem);
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    max-width: 80rem; /* Adjust width to match ChatGPT style */
+    background-color: rgb(3, 0, 31);
+    padding: 2rem;
+    position: relative;
+}
+
+/* Chat scroll area */
+.chats{
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    width: 100%;
+    max-width: 70rem;
+    height: calc(100vh - 17rem);
+    padding-right: 1rem; /* leave 1cm space for scrollbar */
+}
+
+/* Scrollbar customization */
+.chats::-webkit-scrollbar {
+    width: 1.2rem; /* wider scrollbar */
+}
+.chats::-webkit-scrollbar-track {
+    background: rgb(3,0,31);
+}
+.chats::-webkit-scrollbar-thumb {
+    background: rgb(100,100,100);
+    border-radius: 1rem;
+    border: 3px solid rgb(3,0,31);
+}
+
+/* Chat message */
+.chat{
+    margin: 1rem 0;
+    padding: 1.5rem;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: flex-start;
+    text-align: justify;
+    max-width: 50rem; /* reduce message box length */
+}
+
+.Chatimg{
+    object-fit: cover;
+    width: 3rem; /* smaller image */
+    height: 3rem;
+    margin-right: 1.5rem;
+    border-radius: 0.5rem;
+}
+
+.bot{
+    background: rgba(28, 30, 51, 1);
+    width: fit-content;
+    border-radius: 0.5rem;
+}
+
+/* Chat footer */
+.chatFooter{
+    margin-top: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.inp{
+    padding: 0.5rem;
+    background: rgba(28, 30, 58, 1);
+    display: flex;
+    align-items: center;
+    border-radius: 0.5rem;
+    width: 60rem; /* slightly reduced length */
+}
+
+.inp>input {
+    width: calc(100% - 3rem);
+    outline: none;
+    padding: 1rem;
+    color: white;
+}
+
+.inp>input, .send{
+    background: transparent;
+    border: none;
+}
+
+.chatFooter>p{
+    margin: 2rem 0;
+}
+
+/* Upper Sidebar */
+.upperSide{
+    padding: 2.5rem;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.upperSideTop{
+    display: flex;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.logo{
+    margin-right: 1rem;
+    width: 5rem;
+    height: 5rem;
+}
+
+.brand{
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+/* New Chat Button */
+/* New Chat Button */
+.midBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;  /* center icon + text */
+    width: 100%;
+    gap: 1.2rem;
+    background-color: #5A4BFF;
+    border: none;
+    color: white;
+    padding: 2rem;  /* was 1.5rem */
+    border-radius: 1rem;  /* more rounded */
+    cursor: pointer;
+    font-size: 1.7rem;  /* was 1.4rem */
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin: 0 auto 3.5rem auto;
+    box-shadow: 0 4px 12px rgba(90, 75, 255, 0.4); /* subtle glow */
+}
+
+.midBtn:hover {
+    background-color: #4336d9;
+    transform: scale(1.05); /* slight zoom on hover */
+    box-shadow: 0 6px 16px rgba(90, 75, 255, 0.6);
+}
+
+/* Bigger Add (+) Icon */
+.addBtn {
+    width: 2rem;   /* was 1.5rem */
+    height: 2rem;
+}
+
+/* Query Buttons */
+.upperSideBottom {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;  /* more space between queries */
+    margin-top: 2.5rem;
+}
+
+.query {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    justify-content: flex-start;
+    width: 22rem;   /* slightly wider */
+    background-color: rgb(20, 20, 20);
+    border: 1px solid rgb(120, 120, 120);
+    padding: 1.3rem 1.5rem;  /* more padding */
+    border-radius: 0.8rem;
+    cursor: pointer;
+    font-size: 1.5rem;  /* was 1.3rem */
+    font-weight: 500;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.query:hover {
+    background-color: rgb(45, 45, 45);
+    transform: translateX(5px); /* slide effect */
+}
+
+.query img {
+    width: 2rem;   /* was 1.5rem */
+    height: 2rem;
+    object-fit: cover;
+}
+
+/* Lower Sidebar */
+.lowerSide {
+    margin-top: auto;
+    padding: 2rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* Increased gap for better spacing */
+}
+
+.listItems {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; /* Increased gap between icon and text */
+    cursor: pointer;
+    font-size: 1.8rem; /* Increased text size */
+    transition: 0.3s;
+}
+
+.listItems img,
+.listItems svg {
+    width: 2.2rem;  /* Increased icon size */
+    height: 2.2rem; /* Increased icon size */
+}
+
+.listItems:hover {
+    color: rgb(100, 200, 255);
+    transform: scale(1.05); /* Slight hover zoom effect */
+}
+
+
+.listitemsimg{
+    width: 1.8rem;
+    height: 1.8rem;
+}
+/* Page Content (programming, API, Home, Saved, Upgrade) */
+.pageContent {
+    flex: 1;                        /* take up all available space */
+    width: 100%;
+    max-width: 70rem;               /* match chat width */
+    min-height: calc(100vh - 4rem); /* fill screen height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;            /* center horizontally */
+    justify-content: center;        /* center vertically */
+    padding: 2rem;
+    font-size: 1.6rem;
+    text-align: center;
+    line-height: 1.8;
+    overflow-y: auto;               /* allow scrolling if content is long */
+}
+
+/* PageContent headings */
+.pageContent h2 {
+    font-size: 2.4rem;
+    margin-bottom: 2rem;
+    color: #5A4BFF;
+}
+
+/* Paragraphs inside pages */
+.pageContent p {
+    max-width: 60rem;
+    margin-bottom: 2rem;
+    line-height: 1.8;
+}
+
+/* Lists inside pages */
+.pageContent ol, 
+.pageContent ul {
+    text-align: left;
+    margin: 2rem auto;
+    max-width: 55rem;
+    line-height: 2;
+}
+
+.pageContent pre {
+    background: rgba(28, 30, 58, 1);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    text-align: left;
+    max-width: 60rem;
+    overflow-x: auto;
+    font-size: 1.4rem;
+}
+
+/* Inputs for home login page */
+.pageContent input {
+    display: block;
+    margin: 1rem auto;
+    padding: 1rem;
+    width: 80%;
+    max-width: 40rem;
+    border-radius: 0.5rem;
+    border: 1px solid #888;
+    background: #111;
+    color: white;
+    font-size: 1.4rem;
+}
+
+/* Buttons inside pages */
+.pageContent button {
+    margin-top: 2rem;
+    padding: 1rem 2rem;
+    background: #5A4BFF;
+    border: none;
+    border-radius: 0.8rem;
+    color: white;
+    font-size: 1.6rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.pageContent button:hover {
+    background: #4336d9;
+    transform: scale(1.05);
 }
